@@ -1,0 +1,45 @@
+﻿@model IEnumerable<menu.Models.UsersRoles>
+
+@{
+    ViewData["Title"] = "Role użytkowników";
+}
+
+<h1>Role użytkowników</h1>
+
+<p>
+    <a asp-action="Create">Dodaj role użykownikowi</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Rola
+            </th>
+            <th>
+                Użytkownik
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Roles.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Email)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a>
+                    @if (item.Roles.Name != "Administrator")
+                    {
+
+                        <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+                    }
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
